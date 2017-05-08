@@ -18,7 +18,7 @@ For PHP projects run through the command line interface (CLI), you can do the fo
 
 ### Create a `Dockerfile` in your PHP project
 
-    FROM reallyenglish/php:5.3
+    FROM reallyenglish/php:5.3-apache
     COPY . /var/www/html
 
 Then, run the commands to build and run the Docker image:
@@ -31,7 +31,7 @@ Then, run the commands to build and run the Docker image:
 To install additional modules use a `Dockerfile` like this:
 
 ``` Dockerfile
-FROM reallyenglish/php:5.3
+FROM reallyenglish/php:5.3-apache
 
 # Installs curl
 RUN docker-php-ext-install curl
@@ -47,7 +47,7 @@ $ docker build -t my-php-app .
 
 If you don't want to include a `Dockerfile` in your project, it is sufficient to do the following:
 
-    docker run -it --rm --name my-php-app -v "$PWD":/var/www/html reallyenglish/php:5.3
+    docker run -it --rm --name my-php-app -v "$PWD":/var/www/html reallyenglish/php:5.3-apache
 
 ## Credits
 
