@@ -24,7 +24,8 @@ For PHP projects run through the command line interface (CLI), you can do the fo
 Then, run the commands to build and run the Docker image:
 
     docker build -t my-php-app .
-    docker run -it --rm --name my-running-app my-php-app
+    docker run -it --rm --name my-running-app -p 8080:80 my-php-app
+
 
 ### Installing modules
 
