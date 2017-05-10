@@ -10,11 +10,13 @@ RUN rm -rf /var/www/html && \
     chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html
 
 # Apache + PHP requires preforking Apache for best results
-RUN a2dismod mpm_event && a2enmod mpm_prefork
+# Enable sls and rewrite modules as we always use these
+RUN a2dismod mpm_event && a2enmod mpm_prefork && \
+    a2enmod ssl rewrite
 
 RUN mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist
 COPY apache2.conf /etc/apache2/apache2.conf
-
+COPY apache2-foreground /usr/local/bin/
 
 RUN gpg --keyserver pgp.mit.edu --recv-keys 0B96609E270F565C13292B24C13C70B87267B52D 0A95E9A026542D53835E3F3A7DEC4E69FC9C83D7
 
@@ -67,7 +69,6 @@ RUN set -x \
   && make clean
 
 COPY docker-php-* /usr/local/bin/
-COPY apache2-foreground /usr/local/bin/
 
 WORKDIR /var/www/html
 
