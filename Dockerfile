@@ -70,6 +70,9 @@ RUN set -x \
 
 COPY docker-php-* /usr/local/bin/
 
+# Install curl php extension as we use it often
+RUN docker-php-ext-install curl
+
 WORKDIR /var/www/html
 
 EXPOSE 80
