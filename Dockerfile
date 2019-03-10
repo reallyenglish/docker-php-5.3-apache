@@ -12,7 +12,7 @@ RUN rm -rf /var/www/html && \
 # Apache + PHP requires preforking Apache for best results
 # Enable sls and rewrite modules as we always use these
 RUN a2dismod mpm_event && a2enmod mpm_prefork && \
-    a2enmod ssl rewrite
+    a2enmod ssl rewrite deflate
 
 RUN mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist
 COPY apache2.conf /etc/apache2/apache2.conf
